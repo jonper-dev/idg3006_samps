@@ -49,7 +49,7 @@
     {
         "id": "fd6511ba75c4a58a",
         "type": "ui-page",
-        "name": "Smart Room",
+        "name": "Multi-Plant System",
         "ui": "9918e97a58c1f5a6",
         "path": "/home",
         "icon": "home",
@@ -131,175 +131,31 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 200,
+        "x": 160,
         "y": 160,
         "wires": [
-            [
-                "791e3d741a7b5c34"
-            ]
+            []
         ]
     },
     {
         "id": "791e3d741a7b5c34",
         "type": "function",
         "z": "f280fac3056593d7",
-        "name": "function 1",
-        "func": "msg.payload = Math.floor(Math.random() * 20) + 10; // 10–30 °C\nreturn msg;",
+        "name": "ideal conditions getter",
+        "func": "const db = msg.payload;\nconst plant = db.plants.find(p => p.id === \"lemon_tree\");\nmsg.payload = plant.ideal_conditions;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 480,
         "y": 180,
         "wires": [
             [
-                "b10cd5d64ff7f3b7"
+                "628b65281e0d4b9f"
             ]
         ]
-    },
-    {
-        "id": "254fa4c6e462a7c4",
-        "type": "ui-gauge",
-        "z": "f280fac3056593d7",
-        "name": "",
-        "group": "dd96fc3af52cf0b8",
-        "order": 1,
-        "value": "payload",
-        "valueType": "msg",
-        "width": 3,
-        "height": 3,
-        "gtype": "gauge-half",
-        "gstyle": "needle",
-        "title": "Temperature (°C)",
-        "alwaysShowTitle": false,
-        "floatingTitlePosition": "top-left",
-        "units": "units",
-        "icon": "",
-        "prefix": "",
-        "suffix": "°C",
-        "segments": [
-            {
-                "from": "-10",
-                "color": "#8080ff",
-                "text": "",
-                "textType": "label"
-            },
-            {
-                "from": "8",
-                "color": "#5cd65c",
-                "text": "",
-                "textType": "label"
-            },
-            {
-                "from": "16",
-                "color": "#ffc800",
-                "text": "",
-                "textType": "label"
-            },
-            {
-                "from": "24",
-                "color": "#ff8000",
-                "text": "",
-                "textType": "label"
-            },
-            {
-                "from": "32",
-                "color": "#ea5353",
-                "text": "",
-                "textType": "label"
-            }
-        ],
-        "min": "-10",
-        "max": "40",
-        "sizeThickness": 16,
-        "sizeGap": 4,
-        "sizeKeyThickness": 8,
-        "styleRounded": true,
-        "styleGlow": false,
-        "className": "",
-        "x": 730,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b10cd5d64ff7f3b7",
-        "type": "switch",
-        "z": "f280fac3056593d7",
-        "name": "Fan-switch",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "gte",
-                "v": "25",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 2,
-        "x": 530,
-        "y": 180,
-        "wires": [
-            [
-                "254fa4c6e462a7c4",
-                "4b39688f4f343db7",
-                "1f605e5ae68ace8e"
-            ],
-            [
-                "254fa4c6e462a7c4",
-                "4b39688f4f343db7",
-                "1f605e5ae68ace8e"
-            ]
-        ]
-    },
-    {
-        "id": "4b39688f4f343db7",
-        "type": "debug",
-        "z": "f280fac3056593d7",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "msg.payload >= 25 ? \"Fan ON\" : \"Fan OFF\"",
-        "targetType": "jsonata",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "1f605e5ae68ace8e",
-        "type": "ui-text",
-        "z": "f280fac3056593d7",
-        "group": "dd96fc3af52cf0b8",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "Fan-status",
-        "label": "Fan-state:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "value": "msg.payload >= 25 ? \"Fan ON\" : \"Fan OFF\"",
-        "valueType": "jsonata",
-        "x": 710,
-        "y": 180,
-        "wires": []
     },
     {
         "id": "3edbacd2cdc817f6",
@@ -332,12 +188,77 @@
         "enablePointerup": false,
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
-        "x": 210,
+        "x": 170,
         "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "142f4c4bec016872",
+        "type": "json",
+        "z": "f280fac3056593d7",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 310,
+        "y": 180,
         "wires": [
             [
                 "791e3d741a7b5c34"
             ]
         ]
+    },
+    {
+        "id": "628b65281e0d4b9f",
+        "type": "template",
+        "z": "f280fac3056593d7",
+        "name": "paragraph template",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<p> {{payload}} </p>\n",
+        "output": "str",
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "a4526d399d0c8292"
+            ]
+        ]
+    },
+    {
+        "id": "a4526d399d0c8292",
+        "type": "ui-text",
+        "z": "f280fac3056593d7",
+        "group": "1cb89addef8c39f8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "payload",
+        "valueType": "msg",
+        "x": 850,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "737fffad365f0626",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "@flowfuse/node-red-dashboard": "1.29.0"
+        }
     }
 ]
