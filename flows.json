@@ -1,0 +1,343 @@
+[
+    {
+        "id": "f280fac3056593d7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9918e97a58c1f5a6",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true,
+        "allowInstall": false
+    },
+    {
+        "id": "a549681df5036440",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "fd6511ba75c4a58a",
+        "type": "ui-page",
+        "name": "Smart Room",
+        "ui": "9918e97a58c1f5a6",
+        "path": "/home",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "a549681df5036440",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "dd96fc3af52cf0b8",
+        "type": "ui-group",
+        "name": "Sensors",
+        "page": "fd6511ba75c4a58a",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "1cb89addef8c39f8",
+        "type": "ui-group",
+        "name": "Controls",
+        "page": "fd6511ba75c4a58a",
+        "width": 6,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "a357fd193be648e4",
+        "type": "inject",
+        "z": "f280fac3056593d7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "791e3d741a7b5c34"
+            ]
+        ]
+    },
+    {
+        "id": "791e3d741a7b5c34",
+        "type": "function",
+        "z": "f280fac3056593d7",
+        "name": "function 1",
+        "func": "msg.payload = Math.floor(Math.random() * 20) + 10; // 10–30 °C\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "b10cd5d64ff7f3b7"
+            ]
+        ]
+    },
+    {
+        "id": "254fa4c6e462a7c4",
+        "type": "ui-gauge",
+        "z": "f280fac3056593d7",
+        "name": "",
+        "group": "dd96fc3af52cf0b8",
+        "order": 1,
+        "value": "payload",
+        "valueType": "msg",
+        "width": 3,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "needle",
+        "title": "Temperature (°C)",
+        "alwaysShowTitle": false,
+        "floatingTitlePosition": "top-left",
+        "units": "units",
+        "icon": "",
+        "prefix": "",
+        "suffix": "°C",
+        "segments": [
+            {
+                "from": "-10",
+                "color": "#8080ff",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "8",
+                "color": "#5cd65c",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "16",
+                "color": "#ffc800",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "24",
+                "color": "#ff8000",
+                "text": "",
+                "textType": "label"
+            },
+            {
+                "from": "32",
+                "color": "#ea5353",
+                "text": "",
+                "textType": "label"
+            }
+        ],
+        "min": "-10",
+        "max": "40",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 730,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b10cd5d64ff7f3b7",
+        "type": "switch",
+        "z": "f280fac3056593d7",
+        "name": "Fan-switch",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "25",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 180,
+        "wires": [
+            [
+                "254fa4c6e462a7c4",
+                "4b39688f4f343db7",
+                "1f605e5ae68ace8e"
+            ],
+            [
+                "254fa4c6e462a7c4",
+                "4b39688f4f343db7",
+                "1f605e5ae68ace8e"
+            ]
+        ]
+    },
+    {
+        "id": "4b39688f4f343db7",
+        "type": "debug",
+        "z": "f280fac3056593d7",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "msg.payload >= 25 ? \"Fan ON\" : \"Fan OFF\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1f605e5ae68ace8e",
+        "type": "ui-text",
+        "z": "f280fac3056593d7",
+        "group": "dd96fc3af52cf0b8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Fan-status",
+        "label": "Fan-state:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "value": "msg.payload >= 25 ? \"Fan ON\" : \"Fan OFF\"",
+        "valueType": "jsonata",
+        "x": 710,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "3edbacd2cdc817f6",
+        "type": "ui-button",
+        "z": "f280fac3056593d7",
+        "group": "1cb89addef8c39f8",
+        "name": "",
+        "label": "button",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "emulateClick": false,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "791e3d741a7b5c34"
+            ]
+        ]
+    }
+]
