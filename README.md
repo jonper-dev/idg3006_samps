@@ -7,7 +7,16 @@ The Semi-automatic Multi-plant System is a project for watching over and helping
 The system is run on JavaScript-code from makecode.microbit.org, and runs on a Micro:bit connected to a board.
 
 ### Sensors and output devices
-The project is further reliant on a 
+The project is further reliant on the following sensors, lights and equipment.
+Specific numbers accounting for the physical prototype mentioned below,
+but adapt to needs:
+* Soil-moisture sensors (3 used for the prototype).
+* Simple red LEDs (3 used for the prototype).
+* Rainbow LEDs (3 used for the prototype).
+* Wires and breadboards to connect to the Micro:bit-pins.
+* A USB-cable to connect the Micro:bit to laptop(s).
+* A physical prototype in wood and small plants in pots, for demonstration purposes.
+* Liberal use of electrical tape.
 
 ## About
 This project was created for the IDG3006 – Web of Things class at NTNU.
